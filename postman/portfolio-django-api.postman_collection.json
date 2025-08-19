@@ -1,0 +1,53 @@
+{
+  "info": {
+    "name": "Portfolio Django API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://127.0.0.1:8000" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/health/" }
+    },
+    {
+      "name": "OpenAPI (JSON)",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/schema/" }
+    },
+    {
+      "name": "Swagger UI",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/docs/" }
+    },
+    {
+      "name": "JWT • Obtain",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": "{{baseUrl}}/api/token/",
+        "body": { "mode": "raw", "raw": "{\n  \"username\": \"demo\",\n  \"password\": \"demo123\"\n}" }
+      }
+    },
+    {
+      "name": "Items • List",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/api/items/"
+      }
+    },
+    {
+      "name": "Items • Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{baseUrl}}/api/items/",
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Notebook\",\n  \"price\": \"1999.90\"\n}" }
+      }
+    }
+  ]
+}
